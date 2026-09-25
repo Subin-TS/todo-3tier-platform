@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -20,4 +20,12 @@ def create_todo(payload: TodoCreate, db: Session = Depends(get_db)):
     db.add(todo)
     db.commit()
     db.refresh(todo)
+    return todo
+
+
+@router.get("/{todo_id}", response_model=TodoResponse)
+def get_todo(todo_id: int, db: Session = Depends(get_db)):
+    todo = db.get(Todo, todo_id)
+    if todo is None:
+        raise HTTPException(status_code=404, detail="Todo not found")
     return todo
