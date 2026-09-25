@@ -47,3 +47,13 @@ def update_todo(
     db.commit()
     db.refresh(todo)
     return todo
+
+
+@router.delete("/{todo_id}", status_code=204)
+def delete_todo(todo_id: int, db: Session = Depends(get_db)):
+    todo = db.get(Todo, todo_id)
+    if todo is None:
+        raise HTTPException(status_code=404, detail="Todo not found")
+
+    db.delete(todo)
+    db.commit()
