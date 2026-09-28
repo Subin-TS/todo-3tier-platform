@@ -13,5 +13,18 @@ services:
     volumes:
       - todo_mysql_data:/var/lib/mysql
 
+  api:
+    build: .
+    container_name: todo-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DB_HOST: mysql
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+
 volumes:
   todo_mysql_data:
