@@ -18,6 +18,9 @@ spec:
         - name: backend
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: todo-backend-config
           ports:
             - containerPort: {{ .Values.backend.service.port }}
               protocol: TCP

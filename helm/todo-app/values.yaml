@@ -19,3 +19,8 @@ backend:
 
   service:
     port: 8000
+
+  database:
+    host: ""
+    port: 3306
+    name: todo_db
