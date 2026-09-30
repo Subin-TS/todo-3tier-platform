@@ -16,3 +16,11 @@ backend:
     host: todo-staging-mysql.cvm42esgu4mv.ap-south-1.rds.amazonaws.com
     port: 3306
     name: todo
+
+ingress:
+  enabled: true
+  className: alb
+  scheme: internet-facing
+  targetType: ip
+  host: ""
+  healthcheckPath: /

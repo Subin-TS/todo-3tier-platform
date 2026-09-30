@@ -24,3 +24,11 @@ backend:
     host: ""
     port: 3306
     name: todo_db
+
+ingress:
+  enabled: false
+  className: alb
+  scheme: internet-facing
+  targetType: ip
+  host: ""
+  healthcheckPath: /
