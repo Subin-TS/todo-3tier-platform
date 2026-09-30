@@ -9,7 +9,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 env:
@@ -112,3 +112,43 @@ jobs:
         run: |
           docker push \
             ${{ steps.image.outputs.registry }}/${{ env.ECR_FRONTEND_REPOSITORY }}:${{ steps.image.outputs.tag }}
+
+      - name: Update staging image tags
+        run: |
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          import os
+
+          path = Path("helm/todo-app/values-staging.yaml")
+          text = path.read_text()
+
+          lines = text.splitlines()
+          current_image = None
+          output = []
+
+          for line in lines:
+              stripped = line.strip()
+
+              if stripped == "frontend:":
+                  current_image = "frontend"
+              elif stripped == "backend:":
+                  current_image = "backend"
+              elif stripped.startswith("image:"):
+                  current_image = current_image
+              elif stripped.startswith("tag:") and current_image in {"frontend", "backend"}:
+                  indent = line[:len(line) - len(line.lstrip())]
+                  line = f'{indent}tag: {os.environ["GITHUB_SHA"]}'
+                  current_image = None
+
+              output.append(line)
+
+          path.write_text("\n".join(output) + "\n")
+          PYTHON
+
+      - name: Commit updated staging image tags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add helm/todo-app/values-staging.yaml
+          git commit -m "chore: update staging image tags [skip ci]" || echo "No image tag changes to commit"
+          git push

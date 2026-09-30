@@ -2,10 +2,17 @@ frontend:
   replicaCount: 1
 
   image:
+    repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-frontend
     tag: latest
 
 backend:
   replicaCount: 1
 
   image:
+    repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-backend
     tag: latest
+
+  database:
+    host: todo-staging-mysql.cvm42esgu4mv.ap-south-1.rds.amazonaws.com
+    port: 3306
+    name: todo

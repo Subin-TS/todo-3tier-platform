@@ -21,6 +21,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: todo-backend-config
+            - secretRef:
+                name: todo-backend-db
           ports:
             - containerPort: {{ .Values.backend.service.port }}
               protocol: TCP
