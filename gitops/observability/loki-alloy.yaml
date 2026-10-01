@@ -12,6 +12,8 @@ spec:
     helm:
       valuesObject:
         deploymentMode: Monolithic
+        lokiCanary:
+          enabled: false
 
         loki:
           commonConfig:
