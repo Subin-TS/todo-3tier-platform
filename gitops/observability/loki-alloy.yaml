@@ -37,9 +37,13 @@ spec:
         ignoreMinioDeprecation: true
 
         minio:
+          persistence:
+            storageClass: gp2
           enabled: true
 
         singleBinary:
+          persistence:
+            storageClass: gp2
           replicas: 1
 
         backend:
