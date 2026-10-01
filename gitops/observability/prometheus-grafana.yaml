@@ -12,6 +12,11 @@ spec:
     targetRevision: 91.8.2
     helm:
       valuesObject:
+        crds:
+          enabled: true
+          upgradeJob:
+            enabled: true
+            forceConflicts: true
         grafana:
           enabled: true
           replicas: 1
@@ -37,4 +42,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-      - Replace=true
