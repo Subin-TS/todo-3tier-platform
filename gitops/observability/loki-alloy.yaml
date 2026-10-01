@@ -40,6 +40,25 @@ spec:
           persistence:
             storageClass: gp2
           enabled: true
+        chunksCache:
+          enabled: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+
+        resultsCache:
+          enabled: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
 
         singleBinary:
           persistence:
