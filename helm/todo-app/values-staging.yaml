@@ -22,5 +22,6 @@ ingress:
   className: alb
   scheme: internet-facing
   targetType: ip
-  host: ""
+  host: "www.devopslok.in"
+  certificateArn: "arn:aws:acm:ap-south-1:275839157288:certificate/0def636e-7d0e-4ad4-a622-9f1f4d5dd725"
   healthcheckPath: /
