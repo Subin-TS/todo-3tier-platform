@@ -104,6 +104,8 @@ spec:
           create: true
 
         alloy:
+          podAnnotations:
+            config-revision: "2"
           configMap:
             create: true
             content: |
