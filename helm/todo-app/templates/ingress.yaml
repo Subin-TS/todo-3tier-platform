@@ -20,6 +20,22 @@ spec:
       {{- end }}
       http:
         paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-backend
+                port:
+                  number: {{ .Values.backend.service.port }}
+
+          - path: /health
+            pathType: Exact
+            backend:
+              service:
+                name: todo-backend
+                port:
+                  number: {{ .Values.backend.service.port }}
+
           - path: /
             pathType: Prefix
             backend:
