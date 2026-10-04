@@ -3,7 +3,7 @@ frontend:
 
   image:
     repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-frontend
-    tag: 1188b6dce049dac9af70535fa78303b7c0d4dcb5
+    tag: dd2834157a13f30881383d5357b067aae3a0c58c
 
   resources:
     requests:
@@ -18,7 +18,7 @@ backend:
 
   image:
     repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-backend
-    tag: 1188b6dce049dac9af70535fa78303b7c0d4dcb5
+    tag: dd2834157a13f30881383d5357b067aae3a0c58c
 
   resources:
     requests:
