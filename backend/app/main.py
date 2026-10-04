@@ -30,4 +30,4 @@ def ready():
     return {"status": "ready"}
 
 
-app.include_router(todos_router)
+app.include_router(todos_router, prefix="/api")
