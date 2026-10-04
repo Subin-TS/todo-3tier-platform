@@ -3,14 +3,14 @@ frontend:
 
   image:
     repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-frontend
-    tag: 8753de0f41161e6a29e0912690fdf6c767e1a760
+    tag: 1da90e879ccb57ec47b837a03cc1ecd978463b83
 
 backend:
   replicaCount: 1
 
   image:
     repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-backend
-    tag: 8753de0f41161e6a29e0912690fdf6c767e1a760
+    tag: 1da90e879ccb57ec47b837a03cc1ecd978463b83
 
   database:
     host: todo-staging-mysql.cvm42esgu4mv.ap-south-1.rds.amazonaws.com
