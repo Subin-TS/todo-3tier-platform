@@ -9,6 +9,14 @@ frontend:
   service:
     port: 80
 
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
 backend:
   replicaCount: 1
 
@@ -19,6 +27,14 @@ backend:
 
   service:
     port: 8000
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
 
   database:
     host: ""

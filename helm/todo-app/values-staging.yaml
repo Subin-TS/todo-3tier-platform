@@ -5,12 +5,28 @@ frontend:
     repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-frontend
     tag: 1da90e879ccb57ec47b837a03cc1ecd978463b83
 
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
 backend:
   replicaCount: 1
 
   image:
     repository: 275839157288.dkr.ecr.ap-south-1.amazonaws.com/todo-backend
     tag: 1da90e879ccb57ec47b837a03cc1ecd978463b83
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
 
   database:
     host: todo-staging-mysql.cvm42esgu4mv.ap-south-1.rds.amazonaws.com
