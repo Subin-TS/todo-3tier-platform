@@ -129,7 +129,7 @@ function App() {
           <div className="brand-icon">✓</div>
 
           <div>
-            <div className="brand-name">TaskFlow</div>
+            <div className="brand-name">TaskFlow v2</div>
             <div className="brand-subtitle">Todo Manager</div>
           </div>
         </div>
