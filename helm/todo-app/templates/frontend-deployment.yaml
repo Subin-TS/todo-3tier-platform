@@ -1,14 +1,31 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: todo-frontend
   labels:
     app: todo-frontend
 spec:
   replicas: {{ .Values.frontend.replicaCount }}
+
   selector:
     matchLabels:
       app: todo-frontend
+
+  strategy:
+    canary:
+      stableService: todo-frontend
+      canaryService: todo-frontend-canary
+      trafficRouting:
+        alb:
+          ingress: todo-frontend
+          servicePort: {{ .Values.frontend.service.port }}
+      steps:
+        - setWeight: 20
+        - pause: {}
+        - setWeight: 50
+        - pause: {}
+        - setWeight: 100
+
   template:
     metadata:
       labels:
@@ -18,6 +35,7 @@ spec:
         - name: frontend
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+
           resources:
             requests:
               cpu: {{ .Values.frontend.resources.requests.cpu | quote }}
@@ -25,6 +43,7 @@ spec:
             limits:
               cpu: {{ .Values.frontend.resources.limits.cpu | quote }}
               memory: {{ .Values.frontend.resources.limits.memory | quote }}
+
           ports:
             - containerPort: {{ .Values.frontend.service.port }}
               protocol: TCP

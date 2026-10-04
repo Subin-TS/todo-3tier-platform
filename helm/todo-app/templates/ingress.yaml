@@ -12,6 +12,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
     alb.ingress.kubernetes.io/certificate-arn: {{ .Values.ingress.certificateArn | quote }}
     alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/actions.todo-frontend: '{"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"todo-frontend","servicePort":"80","weight":100},{"serviceName":"todo-frontend-canary","servicePort":"80","weight":0}]}}'
 spec:
   ingressClassName: {{ .Values.ingress.className | quote }}
   rules:
@@ -42,5 +43,5 @@ spec:
               service:
                 name: todo-frontend
                 port:
-                  number: {{ .Values.frontend.service.port }}
+                  name: use-annotation
 {{- end }}
